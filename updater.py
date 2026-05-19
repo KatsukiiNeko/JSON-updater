@@ -13,6 +13,7 @@ except ImportError:
     sys.exit(1)
 
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}
+IGNORE_FILES = {"previews.png", "favicon.ico"}
 CATEGORIES = ["design", "web", "python", "javascript"]
 
 
@@ -45,7 +46,7 @@ def scan_images(images_dir):
     """Return list of image filenames in the directory."""
     return sorted(
         f.name for f in images_dir.iterdir()
-        if f.is_file() and f.suffix.lower() in IMAGE_EXTS
+        if f.is_file() and f.suffix.lower() in IMAGE_EXTS and f.name not in IGNORE_FILES
     )
 
 
