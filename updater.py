@@ -62,7 +62,7 @@ def get_referenced_images(projects):
     return refs
 
 
-def convert_to_webp(src_path, quality=85):
+def convert_to_webp(src_path, quality=100):
     """Convert an image to WebP format. Returns the new filename."""
     dest_path = src_path.with_suffix(".webp")
     if dest_path.exists():
