@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "json-updater"
+version = "1.0.0"
+description = "CLI tool to scan portfolio images, convert to WebP, and update projects.json"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+dependencies = [
+    "Pillow>=10.0",
+]
+
+[project.scripts]
+json-updater = "updater:main"
+
+[project.optional-dependencies]
+dev = []
+
+[tool.setuptools]
+py-modules = ["updater"]
