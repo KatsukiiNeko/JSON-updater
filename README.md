@@ -12,21 +12,35 @@ A CLI tool that scans portfolio project images, converts them to WebP, and autom
 
 - Scans `assets/images/` for new, unreferenced images
 - Converts images to WebP format (keeps originals untouched)
-- Interactive prompts for project metadata  
+- Interactive prompts for project metadata
   (title, category, tags, description, URLs)
 - Updates `data/projects.json` and `js/projects.js` fallback simultaneously
 - Skips SVG files and already-converted WebP images
 
-## Setup
+## Installation
 
 ```bash
-pip install -r requirements.txt
+pipx install .
+```
+
+Or editable install for development:
+
+```bash
+pipx install -e .
+```
+
+Or classic pip:
+
+```bash
+pip install .
 ```
 
 ## Usage
 
+After installation, run globally:
+
 ```bash
-python updater.py
+json-updater
 ```
 
 By default, it looks for the portfolio at `~/Portfolio-v2`.
@@ -34,21 +48,21 @@ By default, it looks for the portfolio at `~/Portfolio-v2`.
 Override with:
 
 ```bash
-python updater.py /path/to/portfolio
+json-updater /path/to/portfolio
 ```
 
 Or set environment variable:
 
 ```bash
 export PORTFOLIO_PATH=/path/to/portfolio
-python updater.py
+json-updater
 ```
 
 ## How It Works
 
 1. Loads existing `projects.json`
 2. Scans `assets/images/` for unreferenced images
-3. Converts new images to WebP (quality 85)
+3. Converts new images to WebP (quality 100)
 4. Prompts for metadata:
    - title
    - category
@@ -67,5 +81,3 @@ PNG · JPG · JPEG · WebP · GIF · SVG
 MIT License — see `LICENSE`
 
 © 2026 KatsukiiNeko. All rights reserved.
-
-> Design. Code. Experience.

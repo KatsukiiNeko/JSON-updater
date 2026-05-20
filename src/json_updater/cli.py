@@ -1,24 +1,13 @@
-#!/usr/bin/env python3
-
 import json
 import os
 import shutil
 import sys
 from pathlib import Path
 
-print("""
-   ▗▖ ▗▄▄▖ ▗▄▖ ▗▖  ▗▖    ▗▖ ▗▖▗▄▄▖ ▗▄▄▄   ▗▄▖▗▄▄▄▖▗▄▄▄▖▗▄▄▖ 
-   ▐▌▐▌   ▐▌ ▐▌▐▛▚▖▐▌    ▐▌ ▐▌▐▌ ▐▌▐▌  █ ▐▌ ▐▌ █  ▐▌   ▐▌ ▐▌
-   ▐▌ ▝▀▚▖▐▌ ▐▌▐▌ ▝▜▌    ▐▌ ▐▌▐▛▀▘ ▐▌  █ ▐▛▀▜▌ █  ▐▛▀▀▘▐▛▀▚▖
-▗▄▄▞▘▗▄▄▞▘▝▚▄▞▘▐▌  ▐▌    ▝▚▄▞▘▐▌   ▐▙▄▄▀ ▐▌ ▐▌ █  ▐▙▄▄▖▐▌ ▐▌
-""")
-print("------------------------------------------------------------")
-print("Coded by Katsukii Neko")
-
 try:
     from PIL import Image
 except ImportError:
-    print("Pillow is not installed. Run: pip install -r requirements.txt")
+    print("Pillow is not installed. Run: pip install Pillow")
     sys.exit(1)
 
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}
@@ -191,6 +180,15 @@ def prompt_another_path():
 
 
 def main():
+    print("""
+   \u2597\u2596 \u2597\u2584\u2584\u2596 \u2597\u2584\u2596 \u2597\u2596  \u2597\u2596    \u2597\u2596 \u2597\u2596\u2597\u2584\u2584\u2596 \u2597\u2584\u2584\u2584   \u2597\u2584\u2596\u2597\u2584\u2584\u2584\u2596\u2597\u2584\u2584\u2584\u2596\u2597\u2584\u2584\u2596
+   \u2590\u258c\u2590\u258c   \u2590\u258c \u2590\u258c\u2590\u258c\u259a\u2596\u2590\u258c    \u2590\u258c \u2590\u258c\u2590\u258c \u2590\u258c\u2590\u258c  \u2588 \u2590\u258c \u2590\u258c \u2588  \u2590\u258c   \u2590\u258c \u2590\u258c
+   \u2590\u258c \u259d\u2580\u259a\u2596\u2590\u258c \u2590\u258c \u2590\u258c\u2590\u258c \u259d\u259c\u258c    \u2590\u258c \u2590\u258c\u2590\u258c\u259b\u2580\u2598 \u2590\u258c  \u2588 \u259b\u2580\u259c\u258c \u2588  \u259b\u2580\u2580\u2598\u259b\u2580\u259a\u2596
+\u2597\u2584\u2584\u259e\u2598\u2597\u2584\u2584\u259e\u2598\u259d\u259a\u2584\u259e\u2598\u2590\u258c  \u2590\u258c    \u259d\u259a\u2584\u259e\u2598\u2590\u258c   \u2590\u2599\u2584\u2584\u2580 \u2590\u258c \u2590\u258c \u2588  \u2590\u2599\u2584\u2584\u2596\u2590\u258c \u2590\u258c
+""")
+    print("------------------------------------------------------------")
+    print("Coded by Katsukii Neko")
+
     root = get_portfolio_root()
     images_dir = root / "assets" / "images"
     json_path = root / "data" / "projects.json"
@@ -261,7 +259,3 @@ def main():
     print(f"Updated {js_path}")
 
     print(f"\nDone! Added {len(new_images)} project(s).")
-
-
-if __name__ == "__main__":
-    main()
