@@ -2,6 +2,7 @@
 
 import json
 import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -172,6 +173,23 @@ def update_js_fallback(js_path, projects):
     js_path.write_text(new_content, encoding="utf-8")
 
 
+def prompt_another_path():
+    print("\nNo new images found in portfolio.")
+    answer = input("Add from another path? [Y/n]: ").strip().lower()
+    if answer in ("n", "no"):
+        return None, None
+    path_input = input("Enter file or directory path: ").strip()
+    if not path_input:
+        return None, None
+    path = Path(path_input).expanduser().resolve()
+    if not path.exists():
+        print(f"Path not found: {path}")
+        return None, None
+    if path.is_file():
+        return "file", path
+    return "dir", path
+
+
 def main():
     root = get_portfolio_root()
     images_dir = root / "assets" / "images"
@@ -197,8 +215,27 @@ def main():
     new_images = [img for img in all_images if img not in referenced]
 
     if not new_images:
-        print("No new images found. Everything is up to date.")
-        return
+        path_type, alt_path = prompt_another_path()
+        if alt_path is None:
+            print("No new images found. Everything is up to date.")
+            return
+        if path_type == "file":
+            if alt_path.suffix.lower() not in IMAGE_EXTS:
+                print(f"Not a supported image: {alt_path.name}")
+                return
+            dest = images_dir / alt_path.name
+            shutil.copy2(alt_path, dest)
+            new_images = [alt_path.name]
+            print(f"\nCopied to portfolio: {dest}")
+        else:
+            alt_images = scan_images(alt_path)
+            new_images = [img for img in alt_images if img not in referenced]
+            if not new_images:
+                print("No new images found. Everything is up to date.")
+                return
+            for img in new_images:
+                shutil.copy2(alt_path / img, images_dir / img)
+            print(f"\nCopied {len(new_images)} image(s) to portfolio.")
 
     print(f"Found {len(new_images)} new image(s):")
     for img in new_images:
